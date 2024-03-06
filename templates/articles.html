@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<h3>Makaleler</h3>
+<hr>
+
+<div class="container">
+    
+    <div class="col-md-10 offset-md-3">
+        <div class="form-inline">
+            <form>
+                 {% csrf_token %} 
+             <input class="form-control mr-1" type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+              <button type="submit" class="btn btn-danger">Ara</button>
+            </form>
+      </div>
+    </div>
+    <br>
+
+{% if articles %}
+<ul class="list-group">
+
+    {% for article in articles %}
+    
+    <li class="list-group-item"><a href="{% url 'article:detail' article.id %}">{{article.title}} </a></li>
+    
+</ul>
+
+ 
+
+    
+ {% endfor %}
+    
+{% else %}
+<div class="alert alert-danger">
+    Makale bulunamadı...
+
+    
+</div>
+
+    
+{% endif %}
+    
+{% endblock %}
